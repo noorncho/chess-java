@@ -17,24 +17,16 @@ public class ChessBoard {
                 board[y][x] = " _ ";
             }
         }
-
         chessBoard = new ChessPiece[8][8];
-        /*for(int i = 0; i < chessBoard.length; i++){
-            System.out.println(Arrays.toString(chessBoard[i]));
-        }*/
     }
 
-    /*public boolean isPieceAt(int row, int col){
-        Game game = new Game();
-        int x = game.getKnight().getLocation().getRow();
-        int y = game.getKnight().getLocation().getCol();
-
-        if(x == row && y == col){
-            return true;
-        }else{
+    public boolean isPieceAt(Location location){
+        if(getPieceAt(location) == null){
             return false;
         }
-    }*/
+        return true;
+    }
+
     public ChessPiece getPieceAt(int row, int col){
         ChessPiece piece = chessBoard[row][col];
         return piece;

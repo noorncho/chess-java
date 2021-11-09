@@ -126,8 +126,8 @@ public class ChessPiece {
             }
 
             if(endRow < startRow){
-                for(int i = startRow + 1; i > endRow; i--){
-                    if(board.getPieceAt(i, startCol) != null){
+                for(int i = startRow - 1; i > endRow; i--){
+                    if(board.getPieceAt(i, startCol) != null && board.getPieceAt(i, startCol).getOwner().equalsIgnoreCase(this.getOwner())){
                         System.out.println("No line of sight. Try Again");
                         return false;
                     }
