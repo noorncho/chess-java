@@ -13,15 +13,14 @@ public class ChessPiece {
 
     public ChessPiece(String type, String id, String owner, Location location , Game game) {
         this.type = type;
-        this.id = id;
         this.owner = owner;
         this.game = game;
         this.location = location;
 
-        if(owner.equalsIgnoreCase("white")){
-            id.toUpperCase();
+        if(owner.equals(game.getPlayer1())){
+            this.id = id.toUpperCase();
         }else{
-            id.toLowerCase();
+            this.id = id.toLowerCase();
         }
     }
 
@@ -118,7 +117,7 @@ public class ChessPiece {
         if(startCol == endCol){
             if(endRow > startRow){
                 for(int i = startRow + 1; i < endRow; i++){
-                    if(board.getPieceAt(i, startCol) != null && board.getPieceAt(i, startCol).getOwner() != this.getOwner()){
+                    if(board.getPieceAt(i, startCol) != null && board.getPieceAt(i, startCol).getOwner().equalsIgnoreCase(this.getOwner())){
                         System.out.println("No line of sight. Try Again");
                         return false;
                     }
@@ -159,7 +158,7 @@ public class ChessPiece {
                 for (int row = startRow + 1; row >= endRow; row++) {
                     for (int col = startCol + 1; col >= endCol; col++) {
                         if(Math.abs(startCol - col) == Math.abs(startRow - row)){
-                            if(board.getPieceAt(row, col) != null && board.getPieceAt(row, col).getOwner() != this.getOwner()){
+                            if(board.getPieceAt(row, col) != null && board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())){
                                 System.out.println("No line of sight. Try Again");
                                 return false;
                             }
@@ -174,7 +173,7 @@ public class ChessPiece {
                 for (int row = startRow - 1; row <= endRow; row--) {
                     for (int col = startCol - 1; col <= endCol; col--) {
                         if(Math.abs(startCol - col) == Math.abs(startRow - row)){
-                            if(board.getPieceAt(row, col) != null){
+                            if(board.getPieceAt(row, col) != null && board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())){
                                 System.out.println("No line of sight. Try Again");
                                 return false;
                             }
