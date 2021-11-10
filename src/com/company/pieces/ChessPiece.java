@@ -65,6 +65,10 @@ public class ChessPiece {
     }
 
     public void moveTo(Location newLocation){
+        if(this.game.getChessBoard().getPieceAt(newLocation) != null && this.game.getChessBoard().getPieceAt(newLocation).getOwner().equals(this.getOwner())){
+            System.out.println("You already have a piece at this location. Try Again.");
+            return;
+        }
         if(newLocation.isValid()){
             int newLocationRow = newLocation.getRow();
             int newLocationCol = newLocation.getCol();
@@ -74,6 +78,7 @@ public class ChessPiece {
             getLocation().setCol(newLocationCol);
             setLocation(newLocation);
             getGame().getChessBoard().placePieceAt(this, newLocation); // Places the piece at the new location
+
         }else{
             System.out.println("Invalid Location. Try Again");
         }
@@ -89,11 +94,16 @@ public class ChessPiece {
         //End location is out of bounds of chess board
         if(!end.isValid()) return false;
 
+        /*if(board.getPieceAt(end).getOwner().equals(this.getOwner())){
+            System.out.println("You already have a piece at this location. Try again.");
+            return false;
+        }*/
+
         //Check horizontally
         if(startRow == endRow){
             if(endCol > startCol){
                 for(int i = startCol + 1; i < endCol; i++){
-                    if(board.getPieceAt(startRow, i) != null && board.getPieceAt(startRow, i).getOwner().equalsIgnoreCase(this.getOwner())){
+                    if(board.getPieceAt(startRow, i) != null && !board.getPieceAt(startRow, i).getOwner().equalsIgnoreCase(this.getOwner())){
                         System.out.println("No line of sight. Try Again");
                         return false;
                     }
@@ -103,7 +113,7 @@ public class ChessPiece {
 
             if(endCol < startCol){
                 for(int i = startCol + 1; i > endCol; i--){
-                    if(board.getPieceAt(startRow, i) != null && board.getPieceAt(startRow, i).getOwner().equalsIgnoreCase(this.getOwner())){
+                    if(board.getPieceAt(startRow, i) != null && !board.getPieceAt(startRow, i).getOwner().equalsIgnoreCase(this.getOwner())){
                         System.out.println("No line of sight. Try Again");
                         return false;
                     }
@@ -117,7 +127,7 @@ public class ChessPiece {
         if(startCol == endCol){
             if(endRow > startRow){
                 for(int i = startRow + 1; i < endRow; i++){
-                    if(board.getPieceAt(i, startCol) != null && board.getPieceAt(i, startCol).getOwner().equalsIgnoreCase(this.getOwner())){
+                    if(board.getPieceAt(i, startCol) != null && !board.getPieceAt(i, startCol).getOwner().equalsIgnoreCase(this.getOwner())){
                         System.out.println("No line of sight. Try Again");
                         return false;
                     }
@@ -127,7 +137,7 @@ public class ChessPiece {
 
             if(endRow < startRow){
                 for(int i = startRow - 1; i > endRow; i--){
-                    if(board.getPieceAt(i, startCol) != null && board.getPieceAt(i, startCol).getOwner().equalsIgnoreCase(this.getOwner())){
+                    if(board.getPieceAt(i, startCol) != null && !board.getPieceAt(i, startCol).getOwner().equalsIgnoreCase(this.getOwner())){
                         System.out.println("No line of sight. Try Again");
                         return false;
                     }
@@ -140,10 +150,10 @@ public class ChessPiece {
         if(Math.abs(startCol - endCol) == Math.abs(startRow - endRow)){
             //top-right diagonal
             if(endCol > startCol && endRow < startRow){
-                for (int row = startRow - 1; row <= endRow; row--){
-                    for(int col = startCol + 1; col >= endCol; col++){
+                for (int row = startRow - 1; row >= endRow; row--){
+                    for(int col = startCol + 1; col <= endCol; col++){
                         if(Math.abs(startCol - col) == Math.abs(startRow - row)){
-                            if(board.getPieceAt(row, col) != null && board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())){
+                            if(board.getPieceAt(row, col) != null && !board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())){
                                 System.out.println("No line of sight. Try Again");
                                 return false;
                             }
@@ -155,10 +165,10 @@ public class ChessPiece {
 
             //bottom-right diagonal
             if(endCol > startCol && endRow > startRow){
-                for (int row = startRow + 1; row >= endRow; row++) {
-                    for (int col = startCol + 1; col >= endCol; col++) {
+                for (int row = startRow + 1; row <= endRow; row++) {
+                    for (int col = startCol + 1; col <= endCol; col++) {
                         if(Math.abs(startCol - col) == Math.abs(startRow - row)){
-                            if(board.getPieceAt(row, col) != null && board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())){
+                            if(board.getPieceAt(row, col) != null && !board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())){
                                 System.out.println("No line of sight. Try Again");
                                 return false;
                             }
@@ -170,10 +180,10 @@ public class ChessPiece {
 
             //top-left diagonal
             if(endCol < startCol && endRow < startRow){
-                for (int row = startRow - 1; row <= endRow; row--) {
-                    for (int col = startCol - 1; col <= endCol; col--) {
+                for (int row = startRow - 1; row >= endRow; row--) {
+                    for (int col = startCol - 1; col >= endCol; col--) {
                         if(Math.abs(startCol - col) == Math.abs(startRow - row)){
-                            if(board.getPieceAt(row, col) != null && board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())){
+                            if(board.getPieceAt(row, col) != null && !board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())){
                                 System.out.println("No line of sight. Try Again");
                                 return false;
                             }
@@ -185,10 +195,10 @@ public class ChessPiece {
 
             //bottom-left diagonal
             if(endCol < startCol && endRow > startRow){
-                for (int row = startRow + 1; row >= endRow; row++) {
-                    for (int col = startCol - 1; col <= endCol; col--) {
+                for (int row = startRow + 1; row <= endRow; row++) {
+                    for (int col = startCol - 1; col >= endCol; col--) {
                         if(Math.abs(startCol - col) == Math.abs(startRow - row)){
-                            if(board.getPieceAt(row, col) != null && board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())){
+                            if(board.getPieceAt(row, col) != null && !board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())){
                                 System.out.println("No line of sight. Try Again");
                                 return false;
                             }
