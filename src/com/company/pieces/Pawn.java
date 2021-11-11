@@ -12,11 +12,11 @@ public class Pawn extends ChessPiece{
 
     public Boolean canMoveTo(Location newLocation){
         if(newLocation.getCol() == getLocation().getCol()){
-            if(newLocation.getRow() == getLocation().getRow() + 2 && firstMove){
+            if(Math.abs(newLocation.getRow() - getLocation().getRow()) ==  2 && firstMove){
                 firstMove = false;
                 return true;
             }
-            else if(newLocation.getRow() == getLocation().getRow() + 1){
+            else if(Math.abs(newLocation.getRow() - getLocation().getRow()) ==  1){
                 firstMove = false;
                 return true;
             }

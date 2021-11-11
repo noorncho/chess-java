@@ -17,24 +17,16 @@ public class ChessBoard {
                 board[y][x] = " _ ";
             }
         }
-
         chessBoard = new ChessPiece[8][8];
-        /*for(int i = 0; i < chessBoard.length; i++){
-            System.out.println(Arrays.toString(chessBoard[i]));
-        }*/
     }
 
-    /*public boolean isPieceAt(int row, int col){
-        Game game = new Game();
-        int x = game.getKnight().getLocation().getRow();
-        int y = game.getKnight().getLocation().getCol();
-
-        if(x == row && y == col){
-            return true;
-        }else{
+    public boolean isPieceAt(Location location){
+        if(getPieceAt(location) == null){
             return false;
         }
-    }*/
+        return true;
+    }
+
     public ChessPiece getPieceAt(int row, int col){
         ChessPiece piece = chessBoard[row][col];
         return piece;
@@ -72,7 +64,12 @@ public class ChessBoard {
     }
 
     public void printBoard(){
+        int rowCounter = 0;
+        System.out.println("     0  1  2  3  4  5  6  7");
+        System.out.println("     -----------------------");
+
         for(int row = 0; row < 8; row++){
+            System.out.print(rowCounter + "|  ");
             for(int col = 0; col < 8; col++){
                 if(chessBoard[row][col] == null){
                     System.out.print(" _ ");
@@ -80,8 +77,12 @@ public class ChessBoard {
                     System.out.print(" "+ chessBoard[row][col].getId() + " ");
                 }
             }
+            System.out.print("  |" + rowCounter);
+            rowCounter++;
             System.out.println();
         }
+        System.out.println("     -----------------------");
+        System.out.println("     0  1  2  3  4  5  6  7");
 
         System.out.println();
     }
