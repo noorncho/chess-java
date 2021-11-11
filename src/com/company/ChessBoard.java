@@ -65,11 +65,11 @@ public class ChessBoard {
 
     public void printBoard(){
         int rowCounter = 0;
-        System.out.println("    0  1  2  3  4  5  6  7");
-        System.out.println("    -----------------------");
+        System.out.println("     0  1  2  3  4  5  6  7");
+        System.out.println("     -----------------------");
 
         for(int row = 0; row < 8; row++){
-            System.out.print(rowCounter + "| ");
+            System.out.print(rowCounter + "|  ");
             for(int col = 0; col < 8; col++){
                 if(chessBoard[row][col] == null){
                     System.out.print(" _ ");
@@ -77,9 +77,12 @@ public class ChessBoard {
                     System.out.print(" "+ chessBoard[row][col].getId() + " ");
                 }
             }
+            System.out.print("  |" + rowCounter);
             rowCounter++;
             System.out.println();
         }
+        System.out.println("     -----------------------");
+        System.out.println("     0  1  2  3  4  5  6  7");
 
         System.out.println();
     }
