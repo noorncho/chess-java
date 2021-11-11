@@ -94,17 +94,18 @@ public class ChessPiece {
         //End location is out of bounds of chess board
         if(!end.isValid()) return false;
 
-        /*if(board.getPieceAt(end).getOwner().equals(this.getOwner())){
-            System.out.println("You already have a piece at this location. Try again.");
-            return false;
-        }*/
-
         //Check horizontally
         if(startRow == endRow){
             if(endCol > startCol){
                 for(int i = startCol + 1; i < endCol; i++){
                     if(board.getPieceAt(startRow, i) != null && !board.getPieceAt(startRow, i).getOwner().equalsIgnoreCase(this.getOwner())){
                         System.out.println("No line of sight. Try Again");
+                        return false;
+                    }//Identify any shadows - square is occupied, by piece that belongs to player and moving
+                    // piece is not a knight
+                    else if(board.getPieceAt(startRow, i) != null && board.getPieceAt(startRow, i).getOwner().equalsIgnoreCase(this.getOwner())
+                            && !(this instanceof Knight)){
+                        System.out.println("Shadow identified cannot move. Try Again.");
                         return false;
                     }
                 }
@@ -115,6 +116,12 @@ public class ChessPiece {
                 for(int i = startCol + 1; i > endCol; i--){
                     if(board.getPieceAt(startRow, i) != null && !board.getPieceAt(startRow, i).getOwner().equalsIgnoreCase(this.getOwner())){
                         System.out.println("No line of sight. Try Again");
+                        return false;
+                    }//Identify any shadows - square is occupied, by piece that belongs to player and moving
+                    // piece is not a knight
+                    else if(board.getPieceAt(startRow, i) != null && board.getPieceAt(startRow, i).getOwner().equalsIgnoreCase(this.getOwner())
+                            && !(this instanceof Knight)){
+                        System.out.println("Shadow identified cannot move. Try Again.");
                         return false;
                     }
                 }
@@ -130,6 +137,10 @@ public class ChessPiece {
                     if(board.getPieceAt(i, startCol) != null && !board.getPieceAt(i, startCol).getOwner().equalsIgnoreCase(this.getOwner())){
                         System.out.println("No line of sight. Try Again");
                         return false;
+                    }else if(board.getPieceAt(i, startCol) != null && board.getPieceAt(i, startCol).getOwner().equalsIgnoreCase(this.getOwner())
+                            && !(this instanceof Knight)){
+                        System.out.println("Shadow identified cannot move. Try Again.");
+                        return false;
                     }
                 }
                 return true;
@@ -139,6 +150,10 @@ public class ChessPiece {
                 for(int i = startRow - 1; i > endRow; i--){
                     if(board.getPieceAt(i, startCol) != null && !board.getPieceAt(i, startCol).getOwner().equalsIgnoreCase(this.getOwner())){
                         System.out.println("No line of sight. Try Again");
+                        return false;
+                    }else if(board.getPieceAt(i, startCol) != null && board.getPieceAt(i, startCol).getOwner().equalsIgnoreCase(this.getOwner())
+                            && !(this instanceof Knight)){
+                        System.out.println("Shadow identified cannot move. Try Again.");
                         return false;
                     }
                 }
@@ -157,6 +172,13 @@ public class ChessPiece {
                                 System.out.println("No line of sight. Try Again");
                                 return false;
                             }
+                            //Identify any shadows - square is occupied, by piece that belongs to player and moving
+                            // piece is not a knight
+                            else if(board.getPieceAt(row, col) != null && board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())
+                                    && !(this instanceof Knight)){
+                                System.out.println("Shadow identified cannot move. Try Again.");
+                                return false;
+                            }
                         }
                     }
                 }
@@ -170,6 +192,10 @@ public class ChessPiece {
                         if(Math.abs(startCol - col) == Math.abs(startRow - row)){
                             if(board.getPieceAt(row, col) != null && !board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())){
                                 System.out.println("No line of sight. Try Again");
+                                return false;
+                            }else if(board.getPieceAt(row, col) != null && board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())
+                                    && !(this instanceof Knight)){
+                                System.out.println("Shadow identified cannot move. Try Again.");
                                 return false;
                             }
                         }
@@ -186,6 +212,10 @@ public class ChessPiece {
                             if(board.getPieceAt(row, col) != null && !board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())){
                                 System.out.println("No line of sight. Try Again");
                                 return false;
+                            }else if(board.getPieceAt(row, col) != null && board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())
+                                    && !(this instanceof Knight)){
+                                System.out.println("Shadow identified cannot move. Try Again.");
+                                return false;
                             }
                         }
                     }
@@ -201,6 +231,10 @@ public class ChessPiece {
                             if(board.getPieceAt(row, col) != null && !board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())){
                                 System.out.println("No line of sight. Try Again");
                                 return false;
+                            }else if(board.getPieceAt(row, col) != null && board.getPieceAt(row, col).getOwner().equalsIgnoreCase(this.getOwner())
+                                    && !(this instanceof Knight)){
+                                System.out.println("Shadow identified cannot move. Try Again.");
+                                return false;
                             }
                         }
                     }
@@ -209,6 +243,10 @@ public class ChessPiece {
             }
         }
 
+        return false;
+    }
+
+    private boolean identifiedShadow(ChessPiece piece, Location location){
         return false;
     }
 }
